@@ -71,7 +71,7 @@ typedef struct ourstream_s {
 #  define print_buf(o,s,f,...)
 #endif 
 
-void print_buf_internal(voidpf opaque, voidpf stream, char *format, ...)
+static void print_buf_internal(voidpf opaque, voidpf stream, char *format, ...)
 {
     ourstream_t *streamio = (ourstream_t *)stream;
     va_list arglist;
@@ -81,7 +81,7 @@ void print_buf_internal(voidpf opaque, voidpf stream, char *format, ...)
     va_end(arglist);
 }
 
-voidpf fopen_buf_internal_func (opaque, stream, number_disk, mode)
+static voidpf fopen_buf_internal_func (opaque, stream, number_disk, mode)
    voidpf opaque;
    voidpf stream;
    int number_disk;
@@ -305,7 +305,7 @@ uLong ZCALLBACK fwrite_buf_func (opaque, stream, buf, size)
     return size - bytesLeftToWrite;
 }
 
-ZPOS64_T ftell_buf_internal_func (opaque, stream, position)
+static ZPOS64_T ftell_buf_internal_func (opaque, stream, position)
    voidpf opaque;
    voidpf stream;
    ZPOS64_T position;
@@ -340,7 +340,7 @@ ZPOS64_T ZCALLBACK ftell64_buf_func (opaque, stream)
     return ftell_buf_internal_func(opaque, stream, position);
 }
 
-int fseek_buf_internal_func (opaque, stream, offset, origin)
+static int fseek_buf_internal_func (opaque, stream, offset, origin)
    voidpf opaque;
    voidpf stream;
    ZPOS64_T offset;
